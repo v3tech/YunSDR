@@ -1,0 +1,126 @@
+/*
+ *  Copyright (C) 2011 - 2014 Xilinx
+ *  Copyright (C) 2012 National Instruments Corp.
+ *
+ * This software is licensed under the terms of the GNU General Public
+ * License version 2, as published by the Free Software Foundation, and
+ * may be copied, distributed, and modified under those terms.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+/dts-v1/;
+/include/ "zynq-7000.dtsi"
+
+/ {
+	model = "Zynq ZC702 Development Board";
+	compatible = "xlnx,zynq-zc702", "xlnx,zynq-7000";
+
+	aliases {
+		ethernet0 = &gem0;
+		serial0 = &uart0;
+		spi0 = &spi0;
+		spi1 = &spi1;
+		i2c0 = &i2c0;
+		i2c1 = &i2c1;
+	};
+
+	memory {
+		device_type = "memory";
+		reg = <0x0 0x20000000>;
+	};
+
+	chosen {
+		bootargs = "console=ttyPS0,115200 root=/dev/ram rw
+			ip=192.168.1.10:::255.255.255.0:ZC702:eth0 earlyprintk";
+		linux,stdout-path = "/amba/serial@e0000000";
+	};
+
+};
+
+&spi0 {
+	status = "okay";
+	num-cs = <1>;
+	device@0 {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		compatible = "spidev";
+		spi-cpha;
+		reg = <0x0>;
+		spi-max-frequency = <10000000>;
+	};
+};
+&spi1 {
+	status = "okay";
+	num-cs = <1>;
+	device@0 {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		compatible = "spidev";
+		spi-cpha;
+		reg = <0x0>;
+		spi-max-frequency = <10000000>;
+	};
+};
+
+
+&usb0 {
+	status = "okay";
+	dr_mode = "host";
+	phy_type = "ulpi";
+	usb-reset = <&gpio0 15 0>;
+};
+
+&gem0 {
+	status = "okay";
+	phy-mode = "rgmii-id";
+	phy-handle = <&phy0>;
+
+	phy0: phy@7 {
+		//reg = <7>;
+	};
+};
+
+&i2c0 {
+	status = "okay";
+	clock-frequency = <50000>;
+};
+
+&i2c1 {
+	status = "okay";
+	clock-frequency = <100000>;
+};
+
+
+&sdhci0 {
+	status = "okay";
+};
+
+&uart0 {
+	status = "okay";
+};
+/*
+&smcc {
+	status = "okay";
+	arm,addr25 = <0x0>;
+	arm,nor-chip-sel0 = <0x0>;
+	arm,nor-chip-sel1 = <0x0>;
+	arm,sram-chip-sel0 = <0x0>;
+	arm,sram-chip-sel1 = <0x0>;
+};
+&nand0 {
+	status = "okay";
+	arm,nand-cycle-t0 = <0x4>;
+	arm,nand-cycle-t1 = <0x4>;
+	arm,nand-cycle-t2 = <0x1>;
+	arm,nand-cycle-t3 = <0x2>;
+	arm,nand-cycle-t4 = <0x2>;
+	arm,nand-cycle-t5 = <0x2>;
+	arm,nand-cycle-t6 = <0x4>;
+	partition@nand-android {
+		label = "nand-android";
+		reg = <0x0 0x20000000>;
+	};
+};*/
