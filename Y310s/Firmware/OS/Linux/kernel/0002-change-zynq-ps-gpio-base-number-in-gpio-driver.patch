@@ -1,0 +1,25 @@
+From bb002c0adf0e9e396dabfc49d312289e2312b73a Mon Sep 17 00:00:00 2001
+From: jacky <jackygcc@gmail.com>
+Date: Thu, 29 Oct 2015 14:44:52 +0800
+Subject: [PATCH 2/2] change zynq ps gpio base number in gpio driver
+
+---
+ drivers/gpio/gpio-zynq.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpio/gpio-zynq.c b/drivers/gpio/gpio-zynq.c
+index 31ad5df..2e2df7d 100644
+--- a/drivers/gpio/gpio-zynq.c
++++ b/drivers/gpio/gpio-zynq.c
+@@ -603,7 +603,7 @@ static int zynq_gpio_probe(struct platform_device *pdev)
+ 	chip->free = zynq_gpio_free;
+ 	chip->direction_input = zynq_gpio_dir_in;
+ 	chip->direction_output = zynq_gpio_dir_out;
+-	chip->base = -1;
++	chip->base = 0;
+ 	chip->ngpio = ZYNQ_GPIO_NR_GPIOS;
+ 
+ 	/* Enable GPIO clock */
+-- 
+2.2.1
+
