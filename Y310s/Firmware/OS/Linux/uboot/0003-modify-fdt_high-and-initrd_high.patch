@@ -1,0 +1,27 @@
+From d6e26874a685e8da377f4571e98ac60c0747a520 Mon Sep 17 00:00:00 2001
+From: jacky <jackygcc@gmail.com>
+Date: Thu, 29 Oct 2015 12:28:20 +0800
+Subject: [PATCH 3/3] modify fdt_high and initrd_high
+
+---
+ include/configs/zynq-common.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/include/configs/zynq-common.h b/include/configs/zynq-common.h
+index e5f2fc5..c5b35a1 100644
+--- a/include/configs/zynq-common.h
++++ b/include/configs/zynq-common.h
+@@ -268,8 +268,8 @@
+ 	"devicetree_size=0x20000\0"	\
+ 	"ramdisk_size=0x5E0000\0"	\
+ 	"boot_size=0xF00000\0"	\
+-	"fdt_high=0x20000000\0"	\
+-	"initrd_high=0x20000000\0"	\
++	"fdt_high=0xFFFFFFFF\0"	\
++	"initrd_high=0xFFFFFFFF\0"	\
+ 	"bootenv=uEnv.txt\0" \
+ 	"loadbootenv=load mmc 0 ${loadbootenv_addr} ${bootenv}\0" \
+ 	"importbootenv=echo Importing environment from SD ...; " \
+-- 
+2.2.1
+

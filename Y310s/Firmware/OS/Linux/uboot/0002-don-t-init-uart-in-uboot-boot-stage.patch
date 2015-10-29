@@ -1,0 +1,45 @@
+From 2cd131eeb80bb42bd1e12df54929e12a47edc41e Mon Sep 17 00:00:00 2001
+From: jacky <jackygcc@gmail.com>
+Date: Thu, 29 Oct 2015 12:27:11 +0800
+Subject: [PATCH 2/3] don't init uart in uboot boot stage
+
+---
+ drivers/serial/serial_zynq.c  | 4 ++--
+ include/configs/zynq_zingsk.h | 1 +
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/serial/serial_zynq.c b/drivers/serial/serial_zynq.c
+index 9278763..63752ab 100644
+--- a/drivers/serial/serial_zynq.c
++++ b/drivers/serial/serial_zynq.c
+@@ -94,13 +94,13 @@ static int uart_zynq_serial_init(const int port)
+ 
+ 	if (!regs)
+ 		return -1;
+-
++#ifndef CONFIG_ZYNQ_SERIAL_NO_INIT
+ 	/* RX/TX enabled & reset */
+ 	writel(ZYNQ_UART_CR_TX_EN | ZYNQ_UART_CR_RX_EN | ZYNQ_UART_CR_TXRST | \
+ 					ZYNQ_UART_CR_RXRST, &regs->control);
+ 	writel(ZYNQ_UART_MR_PARITY_NONE, &regs->mode); /* 8 bit, no parity */
+ 	uart_zynq_serial_setbrg(port);
+-
++#endif
+ 	return 0;
+ }
+ 
+diff --git a/include/configs/zynq_zingsk.h b/include/configs/zynq_zingsk.h
+index 051e44e..faa2947 100644
+--- a/include/configs/zynq_zingsk.h
++++ b/include/configs/zynq_zingsk.h
+@@ -13,6 +13,7 @@
+ #define CONFIG_SYS_SDRAM_SIZE		(512 * 1024 * 1024)
+ 
+ #define CONFIG_ZYNQ_SERIAL_UART0
++#define CONFIG_ZYNQ_SERIAL_NO_INIT
+ #define CONFIG_ZYNQ_GEM0
+ #define CONFIG_ZYNQ_GEM_PHY_ADDR0	7
+ 
+-- 
+2.2.1
+
