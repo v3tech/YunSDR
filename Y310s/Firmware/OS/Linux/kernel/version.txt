@@ -1,1 +1,0 @@
-https://github.com/Xilinx/linux-xlnx/tree/xilinx-v2014.4-trd
