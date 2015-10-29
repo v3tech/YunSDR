@@ -1,5 +1,4 @@
 KERN_SRC=/home/jacky/Work/14.6/linux-xlnx
-#KERN_SRC=/media/eric/88c3e546-ad7f-4e7d-a539-7ff10cb8d3ef/home/jacky/Work/14.6/linux-zing
 obj-m := v3best-dma-dac.o
  
 all:
