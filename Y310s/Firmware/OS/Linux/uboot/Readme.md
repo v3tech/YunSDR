@@ -13,5 +13,6 @@
 
 ##build u-boot##
 
+    make zynq_zingsk_config
     make -j4
     mv u-boot u-boot.elf
